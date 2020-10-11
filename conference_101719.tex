@@ -46,9 +46,19 @@
     graph, embedding, community embedding, recommendations, friend suggestions
 \end{IEEEkeywords}
 
+
 \section{Introduction}
-This document is a model and instructions for \LaTeX.
-Please observe the conference page limits.
+
+Graphs, such as social networks, knowledge graphs, content-rating graphs, and communication networks, emerge naturally from various real-world situations. Analyzing these graphs leads to findings and understanding of the underlying structures, coherences, and dependencies. Recently, methods for embedding graph's nodes into lower-dimensional Euclidean spaces, called graph embeddings, have gained traction in multiple areas of data science research.\cite{Goyal_2018}
+
+Due to the rapid growth of the internet and data accumulation, recommender systems are essential for e-business and online business models to survive and strive in the contemporary market.\cite{Polatidis2013RecommenderST} Modern recommender systems need to take into account the huge amounts of user data generated at all times in big data systems around the world and improve recommendations instead of failing under the thrust of big data overload.
+
+Utilizing graph embeddings for recommendation tasks, has recently gained research traction.\cite{Palumbo2018AnEC, Palumbo2018KnowledgeGE, GradGyenge2017GraphEB, Sathish2019GraphEB} Advantages of graph embeddings include data compression and the Euclidean feature vector format.\cite{Godec2018} Given these advantages and provided competitive results, graph embeddings have the possibility of greatly improving upon graph-based use-cases like recommender systems.
+
+Community Embeddings, in addition to embedding a graph's nodes through first- and second-order proximity, also preserve higher-order proximity by embedding clusters present in the graph data. The graph and community embedding algorithm ComE aims to preserve first-, second- and higher-order proximity by embedding a graph's nodes and communities.\cite{ComE}
+
+This work specifically examines community embeddings for friend suggestion recommender systems and evaluates recommendations on social network graph data for the use-case of friend suggestions. Graph and community embeddings generated with ComE BGMM+VI are used to develop a friend suggestions recommender system. Recommendations are evaluated by the top-$N$ recommendations hit-rate of test edges. A friend suggestions recommender system with a top-$10$ leave-one-out hit-rate of over $40\%$ is reached.
+
 
 \section{Ease of Use}
 
