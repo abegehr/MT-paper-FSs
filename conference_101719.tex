@@ -158,27 +158,27 @@ Algorithm \ref{alg:friend_sug_com} describes in pseudocode how recommendations a
         \Require{graph $G = (V, E)$, maximum number of communities K, number of walks $\gamma$, walk length $\ell$, window size $\zeta$, representation size $D$, negative context size $m$, parameters ($\alpha$, $\beta$), number of recommendations $N$.}
         \Ensure{Top-$N$ recommendations for all nodes $R$.}
         % run ComE BGMM+VI
-        \State $\Phi, \Phi', \Pi, (\Psi,\Sigma) \leftarrow ComE_{BGMM+VI}(G, K, \gamma, \ell, \zeta, D, m, \alpha, \beta)$ \Comment{Run ComE BGMM+VI.}
+        \State $\Phi, \Phi', \Pi, (\Psi,\Sigma) \leftarrow ComE_{BGMM+VI}(G, K, \gamma, \ell, \zeta, D, m, \alpha, \beta)$
         %  generate a set of nodes for each community
-        \For{$v \in V$} \Comment{Generate nodes sets $C_k$ per community $k$.}
+        \For{$v \in V$}
         \State $k \leftarrow \pi_v$
         \State $C_k \leftarrow C_k \cup \{v\}$
         \EndFor
         % find friends
-        \For{$(v, v') \in E$} \Comment{Determine sets of friends for each user.}
+        \For{$(v, v') \in E$}
         \State $F_v \leftarrow F_v \cup \{v'\}$
         \State $F_{v'} \leftarrow F_{v'} \cup \{v\}$
         \EndFor
         % for each node
         \For{$v \in V$}
         % generate ascending recommendation list for each node
-        \State $R_v \leftarrow SortedDict(size=N)$ \Comment{Init recommendations for node $v$.}
+        \State $R_v \leftarrow SortedDict(size=N)$
         \For{$v' \in C_k \land v' \notin F_v \land v' \neq v$} \Comment{For all non-friends of user $v$.}
-        \State $d \leftarrow \|\phi_v - \phi_{v'}\|$ \Comment{Distance of $v$ and $v'$ embeddings.}
-        \State $R_v[d] \leftarrow v'$ \Comment{Add $v'$ to $v$'s recommendations at distance $d$.}
+        \State $d \leftarrow \|\phi_v - \phi_{v'}\|$
+        \State $R_v[d] \leftarrow v'$
         \EndFor
         % get Top-N recommendations for each node
-        \State $R_v  \leftarrow R_v.values()$ \Comment{Get top-$N$ recommendations for each node.}
+        \State $R_v  \leftarrow R_v.values()$
         \EndFor
     \end{algorithmic}
 \end{algorithm}
