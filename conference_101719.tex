@@ -119,7 +119,7 @@ Algorithm \ref{alg:friend_sug} describes in pseudocode how recommendations are c
         \Require{graph $G = (V, E)$, maximum number of communities K, number of walks $\gamma$, walk length $\ell$, window size $\zeta$, representation size $D$, negative context size $m$, parameters ($\alpha$, $\beta$), number of recommendations $N$.}
         \Ensure{Top-$N$ recommendations for all nodes $R$.}
         % run ComE BGMM+VI
-        \State $\Phi, \Phi', \Pi, (\Psi,\Sigma) \leftarrow ComE_{BGMM+VI}(G, K, \gamma, \ell, \zeta, D, m, \alpha, \beta)$
+        \State $\Phi, \Phi', \Pi, (\Psi,\Sigma) \leftarrow ComE(G, K, \gamma, \ell, \zeta, D, m, \alpha, \beta)$
         % find friends
         \For{$(v, v') \in E$}
         \State $F_v \leftarrow F_v \cup \{v'\}$
@@ -139,15 +139,11 @@ Algorithm \ref{alg:friend_sug} describes in pseudocode how recommendations are c
     \end{algorithmic}
 \end{algorithm}
 
-The function referenced on line 1, $ComE_{BGMM+VI}(G, \gamma, \ell, \zeta, D, m, \alpha, \beta)$ is the ComE BGMM+VI community embedding algorithm. ComE BGMM+VI is based on the ComE algorithm presented by \citeauthor{ComE} in their paper \citetitle{ComE} as algorithm 1 on page 381 of the publication's in-proceeding \cite{ComE}. ComE BGMM+VI takes a Bayesian approach to community embedding by utilizing  a Bayesian Gaussian mixture model (BGMM) and variational inference (VI) for community embedding and detection instead of a non-Bayesian Gaussian mixture model (GMM) with expectation maximization (EM) \cite{ComE_BGMM_GH}. %TODO citation to the ComE BGMM paper.
+The function $ComE(G, K, \gamma, \ell, \zeta, D, m, \alpha, \beta)$ is the ComE BGMM+VI community embedding algorithm. It returns the node embedding $\Phi$, context embedding $\Phi'$, community assignment $\Pi$, and community embedding $(\Psi,\Sigma)$. ComE BGMM+VI is based on the ComE algorithm presented by \citeauthor{ComE} in their paper \citetitle{ComE} as algorithm 1 on page 381 of the publication's in-proceeding \cite{ComE}. ComE BGMM+VI takes a Bayesian approach to community embedding by utilizing  a Bayesian Gaussian mixture model (BGMM) and variational inference (VI) for community embedding and detection instead of a non-Bayesian Gaussian mixture model (GMM) with expectation maximization (EM) \cite{ComE_BGMM_GH}. %TODO citation to the ComE BGMM paper.
 
-The function $ComE_{BGMM+VI}(G, K, \gamma, \ell, \zeta, D, m, \alpha, \beta)$ returns the node embedding $\Phi$, context embedding $\Phi'$, community assignment $\Pi$, and community embedding $(\Psi,\Sigma)$.
+The runtime of ComE BGMM+VI is equivalent to the runtime of ComE in its big-$O$ notation. ComE's time complexity is $O(\abs{V}\gamma\ell + \abs{V} + T_1 (T_2\abs{V}K + K + \abs{E} + \abs{V}\gamma\ell + \abs{V}K))$, which is linear in time complexity to the graph size: $O(\abs{V} + \abs{E})$ (line 1) \cite{ComE}. All friends of each user are determined in $O(E)$ (lines 2-5). A sorted dictionary of the top-$N$ friend suggestions for each user sorted ascending by distances between the node embeddings is computed in $O(\abs{V}^2N))$ (lines 6-13). Top-$N$ friend suggestions are generated for each user: $O(\abs{V})$. For each user, all users not befriended currently are considered ($O(\abs{V})$) and inserted into a sorted dictionary of length $N$ ($O(N)$).
 
-The runtime of ComE BGMM+VI is equivalent to the runtime of ComE in its big-$O$ notation. ComE's time complexity is $O(\abs{V}\gamma\ell + \abs{V} + T_1 (T_2\abs{V}K + K + \abs{E} + \abs{V}\gamma\ell + \abs{V}K))$, which is linear in time complexity to the graph size: $O(\abs{V} + \abs{E})$ \cite{ComE}.
-
-The node and community embeddings are generated with ComE BGMM+VI in linear time to the graph size: $O(\abs{V}\abs{E})$ (line 1). All friends of each user are determined in $O(E)$ (lines 2-5). A sorted dictionary of the top-$N$ friend suggestions for each user sorted ascending by distances between the node embeddings is computed in $O(\abs{V}^2N))$ (lines 6-13). Top-$N$ friend suggestions are generated for each user ($O(\abs{V})$). For each user, all users not befriended currently are considered ($O(\abs{V})$) and inserted into a sorted dictionary of length $N$ ($O(N)$).
-
-This brings the total time complexity of Algorithm \ref{alg:friend_sug} to $O(\abs{V}\gamma\ell + \abs{V} + T_1 (T_2\abs{V}K + K + \abs{E} + \abs{V}\gamma\ell + \abs{V}K) + \abs{E} + \abs{V}^2N)$. We consider $\gamma$, $\ell$, $T_1$, $T_2$, and $N$ as constant w.r.t the data, therefore the resulting time complexity in big-O notation depends on the graph's size $(\abs{V}, \abs{E})$ and the number of communities $K$: $O(K + \abs{V}K + \abs{E} + \abs{V}^2N)$. The number of communities $K$ can also be considered as constant, in which case the time complexity is $O(\abs{E} + \abs{V}^2N)$.
+This brings the total time complexity of Algorithm \ref{alg:friend_sug} to $O(\abs{V}\gamma\ell + \abs{V} + T_1 (T_2\abs{V}K + K + \abs{E} + \abs{V}\gamma\ell + \abs{V}K) + \abs{E} + \abs{V}^2N)$. We consider $\gamma$, $\ell$, $T_1$, $T_2$, and $N$ as constant, therefore the time complexity depends on the graph's size $(\abs{V}, \abs{E})$ and the number of communities $K$: $O(K + \abs{V}K + \abs{E} + \abs{V}^2)$.
 
 Algorithm \ref{alg:friend_sug_com} describes in pseudocode how recommendations are computed from ComE BGMM+VI node and community embeddings and community assignments. The advantage of also considers community membership, is that an improvement in time complexity can be obtained, by considering only users in the same community for friend suggestions.
 
@@ -158,7 +154,7 @@ Algorithm \ref{alg:friend_sug_com} describes in pseudocode how recommendations a
         \Require{graph $G = (V, E)$, maximum number of communities K, number of walks $\gamma$, walk length $\ell$, window size $\zeta$, representation size $D$, negative context size $m$, parameters ($\alpha$, $\beta$), number of recommendations $N$.}
         \Ensure{Top-$N$ recommendations for all nodes $R$.}
         % run ComE BGMM+VI
-        \State $\Phi, \Phi', \Pi, (\Psi,\Sigma) \leftarrow ComE_{BGMM+VI}(G, K, \gamma, \ell, \zeta, D, m, \alpha, \beta)$
+        \State $\Phi, \Phi', \Pi, (\Psi,\Sigma) \leftarrow ComE(G, K, \gamma, \ell, \zeta, D, m, \alpha, \beta)$
         %  generate a set of nodes for each community
         \For{$v \in V$}
         \State $k \leftarrow \pi_v$
@@ -173,7 +169,7 @@ Algorithm \ref{alg:friend_sug_com} describes in pseudocode how recommendations a
         \For{$v \in V$}
         % generate ascending recommendation list for each node
         \State $R_v \leftarrow SortedDict(size=N)$
-        \For{$v' \in C_k \land v' \notin F_v \land v' \neq v$} \Comment{For all non-friends of user $v$.}
+        \For{$v' \in C_k \land v' \notin F_v \land v' \neq v$}
         \State $d \leftarrow \|\phi_v - \phi_{v'}\|$
         \State $R_v[d] \leftarrow v'$
         \EndFor
@@ -185,9 +181,9 @@ Algorithm \ref{alg:friend_sug_com} describes in pseudocode how recommendations a
 
 Line 1, lines 6-9, and lines 10-17, except for line 12, are the same in Algorithm \ref{alg:friend_sug_com} as in Algorithm \ref{alg:friend_sug}. All users are filtered into sets $C_k$, one for each community $k$ in $O(\abs{V})$ (lines 2-5). Instead of considering the set of all non-friends users of size $\abs{V}$, only users in the same community $C_k$ of size $\frac{\abs{V}}{K}$ are considered (line 12) in $O(\frac{\abs{V}^2N}{K})$.
 
-This brings the total time complexity of Algorithm \ref{alg:friend_sug_com} to $O(\abs{V}\gamma\ell + \abs{V} + T_1 (T_2\abs{V}K + K + \abs{E} + \abs{V}\gamma\ell + \abs{V}K) + \abs{V} + \abs{E} + \frac{\abs{V}^2N}{K})$. Again, we consider $\gamma$, $\ell$, $T_1$, $T_2$, and $N$ as constant, therefore the resulting time complexity in big-O notation depends on the graph's size $(\abs{V}, \abs{E})$ and the number of communities $K$: $O(K + \abs{V}K + \abs{E} + \frac{\abs{V}^2N}{K})$. The number of communities $K$ can also be considered as constant, in which case the time complexity is $O(\abs{E} + \abs{V}^2N)$.
+This brings the total time complexity of Algorithm \ref{alg:friend_sug_com} to $O(\abs{V}\gamma\ell + \abs{V} + T_1 (T_2\abs{V}K + K + \abs{E} + \abs{V}\gamma\ell + \abs{V}K) + \abs{V} + \abs{E} + \frac{\abs{V}^2N}{K})$. Again, we consider $\gamma$, $\ell$, $T_1$, $T_2$, and $N$ as constant, therefore the time complexity depends on the graph's size $(\abs{V}, \abs{E})$ and the number of communities $K$: $O(K + \abs{V}K + \abs{E} + \frac{\abs{V}^2}{K})$.
 
-The time complexity of Algorithm \ref{alg:friend_sug_com}, when not considering $K$ as a substantial factor in time complexity is equivalent to the time complexity of Algorithm \ref{alg:friend_sug}. Nevertheless, $K$ can substantially reduce the quadratic summand $\abs{V}^2N$ through division by only considering users of the same community for friend suggestions. The reduction in time complexity through Algorithm \ref{alg:friend_sug_com} is only scalable when considering $K$ to be variable with the input dataset's graph size. This assumption can be made when considering communities as broad groups of friends for friend suggestions. With ten times more users, these users form ten times more communities.
+The hyper-parameter number of communities $K$ can reduce the quadratic summand $\abs{V}^2N$ by only considering users of the same community for friend suggestions. The reduction in time complexity through Algorithm \ref{alg:friend_sug_com} is only scalable when considering $K$ to be scale with the input graph's size. This assumption can be made when considering communities as groups of friends: with ten times more users, these users form ten times more communities.
 
 
 
