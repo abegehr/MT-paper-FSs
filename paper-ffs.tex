@@ -578,12 +578,12 @@ The charts in Fig. \ref{fig:fb_hit_rates} show the hit-rates for top-$N$ recomme
 
 Two hit-rate lines are shown for each embedding representation size $D \in [2,4,128]$ on $N$-axis. The blue line shows the hit-rates when generating friend suggestions from all users (Algorithm \ref{alg:friend_sug}). The orange line shows the hit-rate when generating recommendations from users in the same community (Algorithm \ref{alg:friend_sug_com}). For lower-dimensional embeddings with $D \in [2,4]$, the hit-rates for Algorithm \ref{alg:friend_sug} and Algorithm \ref{alg:friend_sug_com} largely overlap.
 
-Table \ref{table:fb_hit_rates} shows readings of hit-rates over the algorithms and embedding dimensionality for top-$5$, top-$10$, and top-$20$ recommendations:
+Table \ref{tab:fb_hit_rates} shows readings of hit-rates over the algorithms and embedding dimensionality for top-$5$, top-$10$, and top-$20$ recommendations:
 
 \begin{figure}[htbp]
     \centering
-    \caption{Hit-rates of \citet{social_circles_fb} graph's top-$N$ friend suggestions for algorithms \ref{alg:friend_sug} and \ref{alg:friend_sug_com}, $N \in [10, 20]$, and $D \in [2,4,128]$.}
-    \label{table:fb_hit_rates}
+    \caption{Hit-rates of \citet{social_circles_fb} graph's top-$N$ friend suggestions for algorithms \ref{alg:friend_sug} and \ref{alg:friend_sug_com}, $N \in [5, 10, 20]$, and $D \in [2, 4, 128]$.}
+    \label{tab:fb_hit_rates}
     \begin{tabular}{ l | l | c | c | c }
         \hline
         \empty                                              & \empty  & top-$5$         & top-$10$        & top-$20$        \\
