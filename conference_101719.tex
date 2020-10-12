@@ -268,9 +268,9 @@ As can be seen in Figure \ref{fig:karateclub_spring}, the two communities in the
 
 \subsection{Training and Testing Split}
 
-\citetitle{KarateClubDS} is split into training and testing parts. For evaluation, the leave-one-out (LOO) method is used, where for each testing user one edge is left out, then if the left out edge is in the user's top-$N$ recommendations, a hit is counted, otherwise, a miss is recorded. The leave-one-out method is used in literature for evaluating recommender systems.\cite{Zhao2019ATS, He2017NeuralCF}
+\citetitle{KarateClubDS} is split into training and testing parts. For evaluation, the leave-one-out (LOO) method is used, where for each testing user one edge is left out, then if the left out edge is in the user's top-$N$ recommendations, a hit is counted, otherwise, a miss is recorded.
 
-The three users with the highest degree are chosen as testing users: user 30, user 0, and user 32. For each testing user, a LOO-testing edge is chosen: (30, 23), (0, 1), and (32, 30). These three edges are spared for the testing dataset and omitted from the training graph,
+The three users with the highest degree are chosen as testing users: user 30, user 0, and user 32. For each testing user, a LOO-testing edge is chosen: (30, 23), (0, 1), and (32, 30). These three testing edges are spared for the testing dataset and omitted from the training graph.
 
 \subsection{Embedding}
 
