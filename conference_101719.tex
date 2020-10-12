@@ -364,6 +364,29 @@ The recommender system based on community embeddings with the Bayesian Gaussian 
 
 The method of generating friend suggestions using ComE BGMM+VI embeddings and the smallest-distance approach is applied to the \citetitle{social_circles_fb} graph. Both Algorithm \ref{alg:friend_sug} and Algorithm \ref{alg:friend_sug_com} are evaluated. The top-$N$ recommendations are evaluated by the hit-rate metric.
 
+\subsection{Dataset}
+
+The \citetitle{social_circles_fb} dataset was sourced from the profile and network data of ten ego-networks (egonets) through a custom Facebook app by \citeauthor{social_circles_in_ego_networks} as part of their \citeyear{social_circles_in_ego_networks} article \citetitle{social_circles_in_ego_networks}.\cite{social_circles_in_ego_networks}
+
+Fig. \ref{fig:egonet} shows an illustration of the ego-network of user $u$. User $u$ has direct connections to $v_i$, called alters. Alters can be connected to each other and build circles of users, like families, high school friends, or college friends.
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.48\textwidth]{images/fb/egonet.png}
+    \caption{Illustrative example of an ego-network \cite{social_circles_in_ego_networks}.}
+    \label{fig:egonet}
+\end{figure}
+
+\citeauthor{social_circles_in_ego_networks} obtained profile and network data from ten Facebook ego-networks. The dataset contains 4039 users (nodes) and 88234 friendships (edges).
+
+\subsection{Training and Testing Split}
+
+The \citetitle{social_circles_fb} graph is split into training and testing parts. For evaluation, the leave-one-out (LOO) method is used, where for each testing user one edge is left out, then if the left out edge is in the user's top-$N$ recommendations, a hit is counted, otherwise, a miss is recorded.
+Users with only one connection are removed from the dataset since no network information is added by them.
+
+$1169$ of the 4039 users of the \citetitle{social_circles_fb} graph have at least $50$ connections and are used for testing friend suggestions. The threshold of $50$ friends for considering users for testing is set to make sure enough data is available to make sensable suggestions for testing users.
+
+Now that the testing users are identified, the leave-one-out method is employed for obtaining one testing friendship per testing user. The friendship chosen to leave out for testing for each testing user is chosen randomly using NumPy's random choice.\cite{oliphant2006guide, van2011numpy}
 
 
 %%% Bibliography
