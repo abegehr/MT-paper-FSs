@@ -76,6 +76,13 @@ Community Embeddings, in addition to embedding a graph's nodes through first- an
 
 This work specifically examines community embeddings for friend suggestion recommender systems and evaluates recommendations on social network graph data for the use-case of friend suggestions. Graph and community embeddings generated with ComE BGMM+VI are used to develop a friend suggestions recommender system based on the shortest distances between nodes in the embedding. Recommendations are evaluated by the top-$N$ recommendations hit-rate of test edges. A friend suggestions recommender system with a top-10 leave-one-out hit-rate of 43.6\% and run-time optimized 32.9\% is presented.
 
+\begin{figure}
+    \centering
+    \includegraphics[width=0.48\textwidth]{images/fb/graph_d4.png}
+    \caption{\citetitle{social_circles_fb} graph plotted with networkx's spring layout and node colors representing community membership obtained by ComE BGMM+VI with $D=4$.\cite{networkx}}
+    \label{fig:fb_graph}
+\end{figure}
+
 
 \section{Friend Suggestions}
 
