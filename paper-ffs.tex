@@ -56,9 +56,9 @@
 
 \begin{abstract}
     Graphs, such as social networks, emerge naturally from various real-world situations. Recently, graph embedding methods have gained traction in data science research.
-    Recommender systems are used in a wide range of business applications and are essential for online, e-business models to survive and strive in the contemporary market. Using graph embeddings for recommendation tasks, have the possibility of improving upon recommender systems, because of data compression, their feature vector format, and sub-quadratic time complexity.
+    Recommender systems are used in a wide range of business applications and are essential for online, e-business models to survive and strive in the contemporary market. Using graph embeddings for recommendation tasks has the possibility of improving upon recommender systems, because of data compression, the feature vector format, and sub-quadratic time complexity on computing embeddings.
     Graph and community embeddings generated with ComE BGMM+VI are used to build a recommender system for friend suggestions. ComE BGMM+VI is an alteration of the community embeddings algorithm ComE. ComE BGMM+VI applies a Bayesian Gaussian mixture model and variational inference for community embedding and detection.
-    Recommendations are evaluated by the top-N hit-rate over users with at least 50 friends. A friend suggestions recommender system with a top-10 leave-one-out hit-rate of 43.6\% and run-time optimized 32.9\% is presented.
+    Recommendations are evaluated by the top-N hit-rate over users with at least 50 friends. A friend suggestions recommender system with a top-10 leave-one-out hit-rate of 43.6\% and run-time optimized hit-rate of 32.9\% is presented.
 \end{abstract}
 
 \begin{IEEEkeywords}
@@ -88,7 +88,7 @@ This work specifically examines community embeddings for friend suggestion recom
 
 \section{Friend Suggestions}
 
-Recommender Systems are eagerly researched in academia and widely deployed in real-world business applications. Most contemporary technology companies heavily rely on recommender systems to drive usage of their services and consumption of their content. Users, in turn, rely on recommender systems to find what they want and need and save searching time. State-of-the-art recommender systems provide a competitive advantage desperately needed by online services. Companies heavily relying on recommender systems include YouTube, Amazon, Netflix, and many more \cite{Rocca19}.
+Recommender Systems are eagerly researched in academia and widely deployed in real-world business applications. Most contemporary technology companies heavily rely on recommender systems to drive usage of their services and consumption of their content. Users, in turn, rely on recommender systems to find what they want, need, save searching time, and what they might not have found otherwise. State-of-the-art recommender systems provide a competitive advantage desperately needed by online services. Companies heavily relying on recommender systems include YouTube, Amazon, Netflix, and many more \cite{Rocca19}.
 
 Recommender systems are built on top of user-item interaction. Friend suggestions are a simpler type of recommender system. For friend suggestions, no distinction is made between users and items. The entity user is both the subject and object of recommendation. This results in a simple data model, which can be used for structural friend suggestions, as shown in Fig. \ref{fig:data_model}.
 
@@ -348,7 +348,7 @@ The testing users' removed edges make it to the lists successfully; therefore, t
 \subsection{Evaluation}
 
 The top-$N$ friend suggestions, generated for the testing users with Algorithm \ref{alg:friend_sug_com}, are evaluated against the three removed test edges.
-The ranked lists of friend-suggestions shown in Fig. \ref{tab:karateclub_emb_dists} is used to determine top-$N$ friend suggestions for each testing user and evaluate the recommendations my the hit-rate metric. The LOO-testing edges are printed bold in Table \ref{tab:karateclub_emb_dists}. The resulting top-$N$ hit-rates are plotted against the number of suggestions $N$ in Fig. \ref{fig:karateclub_hitrates}.
+The ranked lists of friend-suggestions shown in Fig. \ref{tab:karateclub_emb_dists} are used to determine top-$N$ friend suggestions for each testing user and evaluate the recommendations my the hit-rate metric. The LOO-testing edges are printed bold in Table \ref{tab:karateclub_emb_dists}. The resulting top-$N$ hit-rates are plotted against the number of suggestions $N$ in Fig. \ref{fig:karateclub_hitrates}.
 
 \begin{figure}[htbp]
     \centering
@@ -501,7 +501,7 @@ Fig. \ref{fig:fb_emb_anim_d2} shows node and community embeddings with represent
 
 While Fig. \ref{fig:fb_emb_anim_d4} and Fig. \ref{fig:fb_emb_anim_d128} show only the first two dimensions, of the node embedding of 4 or 128 dimensionality respectively, the general structure of communities is visible. The development of the node embeddings over the three iterations shows the manifestation of the first-, second-, and higher-order proximity by ComE's closed loop. The node embeddings are densified in their communities and spread out in regards to other communities. All $K=10$ components of the Gaussian mixture model are used for $D=4$ and $D=128$.
 
-The nodes are distributed over the $K=10$ communities as shown in the histograms in Fig. \ref{fig:fb_emb_weights}. Fig. \ref{fig:fb_emb_weights_d2} shows that with representation size $D=2$, ComE BGMM+VI drops 6 communites, effecitvelly using only 4 communities in the final embedding, because the two-dimensional node embeddings are not expressive enough to support more communities. Fig. \ref{fig:fb_emb_weights_d4} and Fig. \ref{fig:fb_emb_weights_d128} show that with representation sizes $D=4$ and $D=128$ respectivelly, all $K=10$ communities are used.
+The nodes are distributed over the $K=10$ communities as shown in the histograms in Fig. \ref{fig:fb_emb_weights}. Fig. \ref{fig:fb_emb_weights_d2} shows that with representation size $D=2$, ComE BGMM+VI drops 6 communities, effecitvelly using only 4 communities in the final embedding, because the two-dimensional node embeddings are not expressive enough to support more communities. Fig. \ref{fig:fb_emb_weights_d4} and Fig. \ref{fig:fb_emb_weights_d128} show that with representation sizes $D=4$ and $D=128$ respectivelly, all $K=10$ communities are used.
 
 The tradeoff between the representation size of the embedding $D$ and the embedding expressiveness is demonstrated. When choosing a too low-dimensional embedding, the embedding might not be expressive enough to capture the communities and reduces the quality of the community embedding and detection. When choosing a too high-dimensional embedding, the node embeddings get so expressive that BGMM+VI is not able to drop unused communities because all communities are used in one of the many dimensions.
 
