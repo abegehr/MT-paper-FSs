@@ -1,5 +1,6 @@
 \documentclass[conference]{IEEEtran}
 
+\usepackage{cite}
 \usepackage{amsmath,amssymb,amsfonts}
 \usepackage{algorithm}
 \usepackage{algpseudocode}
@@ -9,9 +10,9 @@
 \usepackage{multirow}
 \usepackage{mathtools}
 \usepackage{commath}
+\usepackage{caption}
 \usepackage{subcaption}
 \usepackage[super]{nth}
-\usepackage[style=numeric, backend=bibtex, language=english, maxbibnames=99]{biblatex}
 
 % tikz
 \usepackage{tikz}
@@ -27,8 +28,6 @@
     T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
 
 \emergencystretch=8em
-
-\bibliography{literature}
 
 \begin{document}
 
@@ -62,7 +61,7 @@
 \end{abstract}
 
 \begin{IEEEkeywords}
-    graph, embedding, community embedding, ComE, recommendations, friend suggestions
+    graph, embedding, community embedding, ComE, recommender systems, friend suggestions
 \end{IEEEkeywords}
 
 
@@ -613,6 +612,7 @@ This work explores generating friend suggestions from node and community embeddi
 
 
 %%% Bibliography
-\printbibliography
+\bibliographystyle{IEEEtran}
+\bibliography{literature}
 
 \end{document}
