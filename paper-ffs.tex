@@ -608,7 +608,9 @@ Presenting only the top-$10$ friend suggestions to users, a hit-rate of $43.6\%$
 \section{Conclusion}
 
 The proposed shortest-embedding-distance friend suggestion recommender system based on embeddings generated with the community embeddings algorithm ComE BGMM+VI shows promising results.
-A top-$10$ recommendations hit-rate of $43.6\%$ when considering all users (Algorithm \ref{alg:friend_sug}), and over $32.9\%$ when considering users in the same community (Algorithm \ref{alg:friend_sug_com}) is achieved for Facebook friend suggestions.
+A top-$10$ recommendations hit-rate of $43.6\%$ when considering all users (Algorithm \ref{alg:friend_sug}), and over $32.9\%$ when considering users in the same community (Algorithm \ref{alg:friend_sug_com}) is achieved for Facebook friend suggestions. Both results were achieved with a representation size $D=128$. Lower hit-rates are obtained for $D=2$ and $D=4$. See Table \ref{tab:fb_hit_rates}.
+
+Algorithm \ref{alg:friend_sug} achieves the better hit-rate in comparison to Algorithm \ref{alg:friend_sug_com}, since all users are considered for embedding instead of just users of the same community. Algorithm \ref{alg:friend_sug_com}, on the other hand, has better time complexity than Algorithm \ref{alg:friend_sug}, since only users in the same community are considered for friend suggestions instead of all users. Algorithm \ref{alg:friend_sug_com} is scalable to larger datasets if the number of communities $K$ can be considered to scale with the graph size $(\abs{V}, \abs{E})$.
 
 \subsection{Future Work}
 
