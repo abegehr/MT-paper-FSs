@@ -71,11 +71,11 @@
 
 \section{Introduction}
 
-Graphs, such as social networks, knowledge graphs, content-rating graphs, and communication networks, emerge naturally from various real-world situations. Analyzing these graphs leads to findings and understanding of the underlying structures, coherences, and dependencies. Recently, methods for embedding graph's nodes into lower-dimensional Euclidean spaces, called graph embeddings, have gained traction in multiple areas of data science research \cite{Goyal_2018}.
+Graphs, such as social networks, knowledge graphs, content-rating graphs, and communication networks emerge naturally from various real-world situations. Analyzing these graphs leads to findings and understanding of the underlying structures, coherences, and dependencies. Recently, methods for embedding graph's nodes into lower-dimensional, Euclidean spaces, called graph embeddings, have gained traction in multiple areas of data science research \cite{Goyal_2018}.
 
-Due to the rapid growth of the internet and data accumulation, recommender systems are essential for e-business and online business models to survive and strive in the contemporary market \cite{Polatidis2013RecommenderST}. Modern recommender systems need to take into account the huge amounts of user data generated at all times in big data systems around the world and improve recommendations instead of failing under the thrust of big data overload.
+Due to the rapid growth of the internet and data accumulation, recommender systems are essential for e-business and online business models to survive and strive in the contemporary market \cite{Polatidis2013RecommenderST}. Modern recommender systems need to take into account the huge amounts of data generated at all times in big data systems around the world and improve recommendations instead of failing under the thrust of big data overload.
 
-Utilizing graph embeddings for recommendation tasks, has recently gained research traction \cite{Palumbo2018AnEC, Palumbo2018KnowledgeGE, GradGyenge2017GraphEB, Sathish2019GraphEB}. The advantages of graph embeddings include data compression and the Euclidean feature vector format \cite{Godec2018}. Given these advantages and provided competitive results, graph embeddings have the possibility of greatly improving upon graph-based use-cases like recommender systems.
+Utilizing graph embeddings for recommendation tasks, has recently gained research interest \cite{Palumbo2018AnEC, Palumbo2018KnowledgeGE, GradGyenge2017GraphEB, Sathish2019GraphEB}. The advantages of graph embeddings include data compression and the feature vector format \cite{Godec2018}. Given these advantages and provided competitive results, graph embeddings have the possibility of greatly improving upon graph-based use-cases like recommender systems.
 
 Community Embeddings, in addition to embedding a graph's nodes through first- and second-order proximity, also preserve higher-order proximity by embedding clusters present in the graph data. The graph and community embedding algorithm ComE aims to preserve first-, second- and higher-order proximity by embedding a graph's nodes and communities \cite{ComE}.
 
@@ -93,7 +93,7 @@ This work specifically examines community embeddings for friend suggestion recom
 
 Recommender Systems are eagerly researched in academia and widely deployed in real-world business applications. Most contemporary technology companies heavily rely on recommender systems to drive usage of their services and consumption of their content. Users, in turn, rely on recommender systems to find what they want, need, save searching time, and what they might not have found otherwise. State-of-the-art recommender systems provide a competitive advantage desperately needed by online services. Companies heavily relying on recommender systems include YouTube, Amazon, Netflix, and many more \cite{Rocca19}.
 
-Recommender systems are built on top of user-item interaction. Friend suggestions are a simpler type of recommender system. For friend suggestions, no distinction is made between users and items. The entity user is both the subject and object of recommendation. This results in a simple data model, which can be used for structural friend suggestions, as shown in Fig. \ref{fig:data_model}.
+Recommender systems are built on top of user-item interaction. Friend suggestions are a simpler type of recommender system. For friend suggestions no distinction is made between users and items. The entity user is both the subject and object of recommendation. This results in a simple data model, which can be used for structural friend suggestions, as shown in Fig. \ref{fig:data_model}.
 
 \begin{figure}[htbp]
     \centering
@@ -107,7 +107,7 @@ Recommender systems are built on top of user-item interaction. Friend suggestion
 
 The two main methods used for recommender systems are collaborative filtering and content-based filtering. Collaborative filtering is based on the assumption that users like items similar to other items they like and items that are liked by other users with similar tastes \cite{Grover17, Su2009ASO}. Content-based filtering considers user and item attributes, instead of solely interactions \cite{Rocca19, Lops2011SurveyCB}.
 
-In this paper, a method of generating friend suggestions based solely on graph data structure, and not on the node or edge attributes, is presented. The graph of users and friendships is embedded to a lower-dimensional space with the community embedding algorithm ComE BGMM+VI \cite{ComE, ComE+, ComE_BGMM_GH}. The approach can be considered a variant of collaborative filtering with the euclidean distance of user embeddings and user community membership as measures for user similarity. The proposed advantage of using such an approach is that community embeddings optimize first-, second-, and higher-order proximity between users in the node embedding.
+In this paper, a method of generating friend suggestions based solely on graph data structure, and not on the node or edge attributes, is presented. The graph of users and friendships is embedded to a lower-dimensional space with the community embedding algorithm ComE BGMM+VI \cite{ComE, ComE+, ComE_BGMM_GH}. The approach can be considered a variant of collaborative filtering with the Euclidean distance of user embeddings and user community membership as measures for user similarity. The proposed advantage of using such an approach is that community embeddings optimize first-, second-, and higher-order proximity between users in the node embedding.
 
 \subsection{Evaluation}
 
@@ -115,9 +115,9 @@ To determine the effectivity of friend suggestions, the generated friend suggest
 
 A user's top-$N$ recommendations is a list of $N$ items to be recommended to a specific user. To evaluate recommender systems with the top-$N$ and hit-rate approach, initially, the dataset is split into train and test data. For each testing user, one relation is left out, according to the leave-one-out method and the model is trained on the remaining training dataset. Once the model is trained, a list of top-$N$ recommendations is generated for each testing user. If the item corresponding to the user is in the user's top-$N$ list, a hit is counted, otherwise, a miss is counted. The hit-rate is defined as the total number of hits divided by the number of testing users.
 
-Utilizing the top-$N$ approach with hit-rate to evaluate recommender systems is advantageous to evaluating recommender systems by a link prediction approach since the top-$N$ approach is more realistic in comparison to actual recommender system use-cases. When you open Netflix, Amazon, YouTube, or Facebook friend suggestions, one or multiple top-$N$ recommendation lists are generated and displayed. If you click on an item and buy, watch, or befriend, that is considered a hit, otherwise, a miss.
+Utilizing the top-$N$ approach with hit-rate to evaluate recommender systems is advantageous to evaluating recommender systems by a link prediction approach since the top-$N$ approach is more realistic in comparison to actual recommender system use-cases. When you open Netflix, Amazon, YouTube, or Facebook one or multiple top-$N$ recommendation lists are generated and displayed. If you click on an item and buy, watch, or befriend, that is considered a hit, otherwise, a miss.
 
-The hit-rate metric on top-$N$ recommendations provides a realistic option of evaluating recommender systems and with the leave-one-out (LOO) strategy is used often in literature \cite{Cremonesi2010PerformanceOR, Palumbo2017entity2rec, Zhao2019ATS, He2017NeuralCF}.
+The hit-rate metric on top-$N$ recommendations provides a realistic option of evaluating recommender systems and is often used with the leave-one-out (LOO) strategy in literature \cite{Cremonesi2010PerformanceOR, Palumbo2017entity2rec, Zhao2019ATS, He2017NeuralCF}.
 
 
 \section{Algorithm}
@@ -201,7 +201,7 @@ The runtimes for Algorithm \ref{alg:friend_sug} and \ref{alg:friend_sug_com} whe
 
 \begin{table}
     \centering
-    \caption{Algorithm \ref{alg:friend_sug} and \ref{alg:friend_sug_com} time complexity.}
+    \caption{Time complexity of algorithms \ref{alg:friend_sug} and \ref{alg:friend_sug_com}.}
     \label{tab:runtimes}
     \begin{tabular}{l l | c}
         \multirow{2}{*}{$K$ constant} & Algorithm \ref{alg:friend_sug}     & $O(\abs{E} + \abs{V}^2)$                          \\
@@ -290,7 +290,7 @@ ComE BGMM+VI is run with the hyperparameters listed in Table \ref{tab:params_kar
 
 \subsection{Friend Suggesting}
 
-With embeddings generated, top-$N$ friend suggestion recommendations are generated from the training node and community embeddings for the testing users. For each testing user, a ranked list of non-friend users from the same community is generated (Algorithm \ref{alg:friend_sug_com}). A test user's friend suggestion list is ordered in ascending order by the euclidean distance between the node embeddings. Table \ref{tab:karateclub_emb_dists} shows the test users' friend suggestion ranked lists.
+With embeddings generated, top-$N$ friend suggestion recommendations are generated from the training node and community embeddings for the testing users. For each testing user, a ranked list of non-friend users from the same community is generated (Algorithm \ref{alg:friend_sug_com}). A test user's friend suggestion list is ordered in ascending order by the Euclidean distance between the node embeddings. Table \ref{tab:karateclub_emb_dists} shows the test users' friend suggestion ranked lists.
 
 \begin{table}
     \centering
@@ -351,7 +351,7 @@ The testing users' removed edges make it to the lists successfully; therefore, t
 \subsection{Evaluation}
 
 The top-$N$ friend suggestions, generated for the testing users with Algorithm \ref{alg:friend_sug_com}, are evaluated against the three removed test edges.
-The ranked lists of friend-suggestions shown in Fig. \ref{tab:karateclub_emb_dists} are used to determine top-$N$ friend suggestions for each testing user and evaluate the recommendations my the hit-rate metric. The LOO-testing edges are printed bold in Table \ref{tab:karateclub_emb_dists}. The resulting top-$N$ hit-rates are plotted against the number of suggestions $N$ in Fig. \ref{fig:karateclub_hitrates}.
+The ranked lists of friend-suggestions shown in Table \ref{tab:karateclub_emb_dists} are used to determine top-$N$ friend suggestions for each testing user and evaluate the recommendations my the hit-rate metric. The LOO-testing edges are printed bold in Table \ref{tab:karateclub_emb_dists}. The resulting top-$N$ hit-rates are plotted against the number of suggestions $N$ in Fig. \ref{fig:karateclub_hitrates}.
 
 \begin{figure}[htbp]
     \centering
@@ -474,7 +474,7 @@ The $4$- and $128$-dimensional node and community embeddings cannot effectively 
 \fbEmbAnimD{4}
 \fbEmbAnimD{128}
 
-Fig. \ref{fig:fb_graphs} shows the graph spring plotted with networkx and nodes colored by community membership after the lastest iteration of ComE.\cite{networkx} The spring plotted graph structure on Fig. \ref{fig:fb_graphs} suggest, that with embedding dimension $D=4$, more fitting communities are detected than for $D=2$ and $D=128$.
+Fig. \ref{fig:fb_graphs} shows the graph spring plotted with networkx and nodes colored by community membership after the last iteration of ComE.\cite{networkx} The spring plotted graph structure on Fig. \ref{fig:fb_graphs} suggest, that with embedding dimension $D=4$, more fitting communities are detected than for $D=2$ and $D=128$.
 
 \begin{figure*}[htbp]
     \centering
