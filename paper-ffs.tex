@@ -80,7 +80,7 @@ This work specifically examines community embeddings for friend suggestion recom
 \begin{figure}[htbp]
     \centering
     \includegraphics[width=0.48\textwidth]{images/fb/graph_d4.png}
-    \caption{\citetitle{social_circles_fb} graph plotted with networkx's spring layout and node colors representing community membership obtained by ComE BGMM+VI with $D=4$.\cite{networkx}}
+    \caption{Social circles Facebook graph plotted with networkx's spring layout and node colors representing community membership obtained by ComE BGMM+VI with $D=4$ \cite{networkx}.}
     \label{fig:fb_graph}
 \end{figure}
 
@@ -265,7 +265,7 @@ Fig. \ref{fig:karateclub_spring} shows the 34 nodes and 78 edges of the \citetit
     \end{tabular}
 \end{table}
 
-As can be seen in Figure \ref{fig:karateclub_spring}, the two communities in the \citetitle{KarateClubDS} dataset are correctly identified, despite the number of communities being initialized with $K=5$. Thanks to the Bayesian approach to community modeling and optimization through variational inference, three unused communities are dropped, which leaves the prominent two communities present in the dataset. The node classification obtained reflects the node classification published in the \citeyear{ComE} original ComE paper by \citeauthor{ComE}.\cite{ComE}
+As can be seen in Fig. \ref{fig:karateclub_spring}, the two communities in the \citetitle{KarateClubDS} dataset are correctly identified, despite the number of communities being initialized with $K=5$. Thanks to the Bayesian approach to community modeling and optimization through variational inference, three unused communities are dropped, which leaves the prominent two communities present in the dataset. The node classification obtained reflects the node classification published in the \citeyear{ComE} original ComE paper by \citeauthor{ComE}.\cite{ComE}
 
 \subsection{Training and Testing Split}
 
@@ -347,7 +347,7 @@ The testing users' removed edges make it to the lists successfully; therefore, t
 \subsection{Evaluation}
 
 The top-$N$ friend suggestions, generated for the testing users with Algorithm \ref{alg:friend_sug_com}, are evaluated against the three removed test edges.
-The ranked lists of friend-suggestions shown in Figure \ref{tab:karateclub_emb_dists} is used to determine top-$N$ friend suggestions for each testing user and evaluate the recommendations my the hit-rate metric. The LOO-testing edges are printed bold in Table \ref{tab:karateclub_emb_dists}. The resulting top-$N$ hit-rates are plotted against the number of suggestions $N$ in Fig. \ref{fig:karateclub_hitrates}.
+The ranked lists of friend-suggestions shown in Fig. \ref{tab:karateclub_emb_dists} is used to determine top-$N$ friend suggestions for each testing user and evaluate the recommendations my the hit-rate metric. The LOO-testing edges are printed bold in Table \ref{tab:karateclub_emb_dists}. The resulting top-$N$ hit-rates are plotted against the number of suggestions $N$ in Fig. \ref{fig:karateclub_hitrates}.
 
 \begin{figure}[htbp]
     \centering
@@ -361,13 +361,13 @@ Fig. \ref{fig:karateclub_hitrates} shows promising results for using ComE to gen
 
 \section{Facebook Friend Suggestions}
 
-The recommender system based on community embeddings with the Bayesian Gaussian mixture model and variational inference is quantitatively evaluated. Friend suggestions are generated for the \citetitle{social_circles_fb} dataset \cite{social_circles_fb, social_circles_in_ego_networks}.
+The recommender system based on community embeddings with the Bayesian Gaussian mixture model and variational inference is quantitatively evaluated. Friend suggestions are generated for the Social circles Facebook dataset \cite{social_circles_fb, social_circles_in_ego_networks}.
 
-The method of generating friend suggestions using ComE BGMM+VI embeddings and the smallest-distance approach is applied to the \citetitle{social_circles_fb} graph. Both Algorithm \ref{alg:friend_sug} and Algorithm \ref{alg:friend_sug_com} are evaluated. The top-$N$ recommendations are evaluated by the hit-rate metric.
+The method of generating friend suggestions using ComE BGMM+VI embeddings and the smallest-distance approach is applied to the Social circles Facebook graph. Both Algorithm \ref{alg:friend_sug} and Algorithm \ref{alg:friend_sug_com} are evaluated. The top-$N$ recommendations are evaluated by the hit-rate metric.
 
 \subsection{Dataset}
 
-The \citetitle{social_circles_fb} dataset was sourced from the profile and network data of ten ego-networks (egonets) through a custom Facebook app by \citeauthor{social_circles_in_ego_networks} as part of their \citeyear{social_circles_in_ego_networks} article \citetitle{social_circles_in_ego_networks}.\cite{social_circles_in_ego_networks}
+The Social circles Facebook dataset was sourced from the profile and network data of ten ego-networks (egonets) through a custom Facebook app by \citeauthor{social_circles_in_ego_networks} as part of their \citeyear{social_circles_in_ego_networks} article \citetitle{social_circles_in_ego_networks}.\cite{social_circles_in_ego_networks}
 
 Fig. \ref{fig:egonet} shows an illustration of the ego-network of user $u$. User $u$ has direct connections to $v_i$, called alters. Alters can be connected to each other and build circles of users, like families, high school friends, or college friends.
 
@@ -382,20 +382,20 @@ Fig. \ref{fig:egonet} shows an illustration of the ego-network of user $u$. User
 
 \subsection{Training and Testing Split}
 
-The \citetitle{social_circles_fb} graph is split into training and testing parts. For evaluation, the leave-one-out (LOO) method is used, where for each testing user one edge is left out, then if the left out edge is in the user's top-$N$ recommendations, a hit is counted, otherwise, a miss is recorded.
+The Social circles Facebook graph is split into training and testing parts. For evaluation, the leave-one-out (LOO) method is used, where for each testing user one edge is left out, then if the left out edge is in the user's top-$N$ recommendations, a hit is counted, otherwise, a miss is recorded.
 Users with only one connection are removed from the dataset since no network information is added by them.
 
-$1169$ of the 4039 users of the \citetitle{social_circles_fb} graph have at least $50$ connections and are used for testing friend suggestions. The threshold of $50$ friends for considering users for testing is set to make sure enough data is available to make sensable suggestions for testing users.
+$1169$ of the 4039 users of the Social circles Facebook graph have at least $50$ connections and are used for testing friend suggestions. The threshold of $50$ friends for considering users for testing is set to make sure enough data is available to make sensable suggestions for testing users.
 
 Now that the testing users are identified, the leave-one-out method is employed for obtaining one testing friendship per testing user. The friendship chosen to leave out for testing for each testing user is chosen randomly using NumPy's random choice.\cite{oliphant2006guide, van2011numpy}
 
 \subsection{Embedding}
 
-Community embeddings for the \citetitle{social_circles_fb} graph are generated by running ComE BGMM+VI with the hyperparameters listed in Table \ref{tab:params_fb}.
+Community embeddings for the Social circles Facebook graph are generated by running ComE BGMM+VI with the hyperparameters listed in Table \ref{tab:params_fb}.
 
 \begin{table}
     \centering
-    \caption{Hyperparameters used for the \citetitle{social_circles_fb} dataset.}
+    \caption{Hyperparameters used for the Social circles Facebook dataset.}
     \label{tab:params_fb}
     \begin{tabular}{ l | c | r }
         parameter                    & notation & value       \\
@@ -435,10 +435,10 @@ Community embeddings for the \citetitle{social_circles_fb} graph are generated b
     \end{tabular}
 \end{table}
 
-As is shown in Table \ref{tab:params_fb}, the embedding's representation size $D$ is varied along three values. A representation size $D \in [2,4,128]$ is chosen to determine the effect of the embedding's dimensionality on friend suggestions. It is hypothesized, that two dimensions are not sufficient to capture the structure of the \citetitle{social_circles_fb} graph, due to its size, therefore higher dimensional embeddings are evaluated as well.
+As is shown in Table \ref{tab:params_fb}, the embedding's representation size $D$ is varied along three values. A representation size $D \in [2,4,128]$ is chosen to determine the effect of the embedding's dimensionality on friend suggestions. It is hypothesized, that two dimensions are not sufficient to capture the structure of the Social circles Facebook graph, due to its size, therefore higher dimensional embeddings are evaluated as well.
 
 Fig. \ref{fig:fb_emb_anim_d2}, Fig. \ref{fig:fb_emb_anim_d4}, and Fig. \ref{fig:fb_emb_anim_d128} show the node embeddings generated by ComE BGMM+VI after one, two, and three iterations. The nodes are colored by community membership from ComE's community embedding and detection.
-The $4$- and $128$-dimensional node and community embeddings cannot effectively be plotted in two-dimensional print. Instead, in Figures \ref{fig:fb_emb_anim_d4} and \ref{fig:fb_emb_anim_d128} the two first dimensions of the node and community embeddings are plotted to gain a narrow perspective on the resulting node embeddings.
+The $4$- and $128$-dimensional node and community embeddings cannot effectively be plotted in two-dimensional print. Instead, in Fig. \ref{fig:fb_emb_anim_d4} and Fig. \ref{fig:fb_emb_anim_d128} the two first dimensions of the node and community embeddings are plotted to gain a narrow perspective on the resulting node embeddings.
 
 \newcommand{\fbEmbAnimD}[1]{
     \begin{figure*}[htbp]
@@ -470,7 +470,7 @@ The $4$- and $128$-dimensional node and community embeddings cannot effectively 
 \fbEmbAnimD{4}
 \fbEmbAnimD{128}
 
-Fig. \ref{fig:fb_graphs} shows the graph spring plotted with networkx and nodes colored by community membership after the lastest iteration of ComE.\cite{networkx} The spring plotted graph structure on Figure \ref{fig:fb_graphs} suggest, that with embedding dimension $D=4$, more fitting communities are detected than for $D=2$ and $D=128$.
+Fig. \ref{fig:fb_graphs} shows the graph spring plotted with networkx and nodes colored by community membership after the lastest iteration of ComE.\cite{networkx} The spring plotted graph structure on Fig. \ref{fig:fb_graphs} suggest, that with embedding dimension $D=4$, more fitting communities are detected than for $D=2$ and $D=128$.
 
 \begin{figure*}[htbp]
     \centering
@@ -496,11 +496,11 @@ Fig. \ref{fig:fb_graphs} shows the graph spring plotted with networkx and nodes 
     \label{fig:fb_graphs}
 \end{figure*}
 
-Figure \ref{fig:fb_emb_anim_d2} shows node and community embeddings with representation size $D=2$. The limiting two-dimensional space does not allow ComE to represent the \citetitle{social_circles_fb} graph's structure sufficiently to utilize the $K=10$ components of the Gaussian mixture model. Only three components are used after the last of three iterations.
+Fig. \ref{fig:fb_emb_anim_d2} shows node and community embeddings with representation size $D=2$. The limiting two-dimensional space does not allow ComE to represent the Social circles Facebook graph's structure sufficiently to utilize the $K=10$ components of the Gaussian mixture model. Only three components are used after the last of three iterations.
 
-While Figures \ref{fig:fb_emb_anim_d4} and \ref{fig:fb_emb_anim_d128} show only the first two dimensions, of the node embedding of 4 or 128 dimensionality respectively, the general structure of communities is visible. The development of the node embeddings over the three iterations shows the manifestation of the first-, second-, and higher-order proximity by ComE's closed loop. The node embeddings are densified in their communities and spread out in regards to other communities. All $K=10$ components of the Gaussian mixture model are used for $D=4$ and $D=128$.
+While Fig. \ref{fig:fb_emb_anim_d4} and Fig. \ref{fig:fb_emb_anim_d128} show only the first two dimensions, of the node embedding of 4 or 128 dimensionality respectively, the general structure of communities is visible. The development of the node embeddings over the three iterations shows the manifestation of the first-, second-, and higher-order proximity by ComE's closed loop. The node embeddings are densified in their communities and spread out in regards to other communities. All $K=10$ components of the Gaussian mixture model are used for $D=4$ and $D=128$.
 
-The nodes are distributed over the $K=10$ communities as shown in the histograms in Figure \ref{fig:fb_emb_weights}. Figure \ref{fig:fb_emb_weights_d2} shows that with representation size $D=2$, ComE BGMM+VI drops 6 communites, effecitvelly using only 4 communities in the final embedding, because the two-dimensional node embeddings are not expressive enough to support more communities. Figures \ref{fig:fb_emb_weights_d4} and \ref{fig:fb_emb_weights_d128} show that with representation sizes $D=4$ and $D=128$ respectivelly, all $K=10$ communities are used.
+The nodes are distributed over the $K=10$ communities as shown in the histograms in Fig. \ref{fig:fb_emb_weights}. Fig. \ref{fig:fb_emb_weights_d2} shows that with representation size $D=2$, ComE BGMM+VI drops 6 communites, effecitvelly using only 4 communities in the final embedding, because the two-dimensional node embeddings are not expressive enough to support more communities. Fig. \ref{fig:fb_emb_weights_d4} and Fig. \ref{fig:fb_emb_weights_d128} show that with representation sizes $D=4$ and $D=128$ respectivelly, all $K=10$ communities are used.
 
 The tradeoff between the representation size of the embedding $D$ and the embedding expressiveness is demonstrated. When choosing a too low-dimensional embedding, the embedding might not be expressive enough to capture the communities and reduces the quality of the community embedding and detection. When choosing a too high-dimensional embedding, the node embeddings get so expressive that BGMM+VI is not able to drop unused communities because all communities are used in one of the many dimensions.
 
@@ -568,7 +568,7 @@ The charts in Fig. \ref{fig:fb_hit_rates} show the hit-rates for top-$N$ recomme
         \label{fig:fb_hit_rates_d128}
     \end{subfigure}%
 
-    \caption{Hit-rates of \citetitle{social_circles_fb} graph's top-$N$ friend suggestions on $N$-axis for $D \in [2,4,128]$. Hit-rate lines for Algorithm \ref{alg:friend_sug} and Algorithm \ref{alg:friend_sug_com} overlap for $D=2$ and $D=4$.}
+    \caption{Hit-rates of Social circles Facebook graph's top-$N$ friend suggestions on $N$-axis for $D \in [2,4,128]$. Hit-rate lines for Algorithm \ref{alg:friend_sug} and Algorithm \ref{alg:friend_sug_com} overlap for $D=2$ and $D=4$.}
     \label{fig:fb_hit_rates}
 \end{figure}
 
@@ -578,7 +578,7 @@ Table \ref{table:fb_hit_rates} shows readings of hit-rates over the algorithms a
 
 \begin{figure}[htbp]
     \centering
-    \caption{Hit-rates of \citetitle{social_circles_fb} graph's top-$N$ friend suggestions for algorithms \ref{alg:friend_sug} and \ref{alg:friend_sug_com}, $N \in [10, 20]$, and $D \in [2,4,128]$.}
+    \caption{Hit-rates of Social circles Facebook graph's top-$N$ friend suggestions for algorithms \ref{alg:friend_sug} and \ref{alg:friend_sug_com}, $N \in [10, 20]$, and $D \in [2,4,128]$.}
     \label{table:fb_hit_rates}
     \begin{tabular}{ l | l | c | c | c }
         \hline
