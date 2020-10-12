@@ -11,7 +11,8 @@
 		"grammarly.domain": "academic",
 		"grammarly.userWords": [
 			"networkx",
-			"egonets"
+			"egonets",
+			"networkx's",
 		],
 	}
 }
