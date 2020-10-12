@@ -501,7 +501,9 @@ Figure \ref{fig:fb_emb_anim_d2} shows node and community embeddings with represe
 
 While Figures \ref{fig:fb_emb_anim_d4} and \ref{fig:fb_emb_anim_d128} show only the first two dimensions, of the node embedding of 4 or 128 dimensionality respectively, the general structure of communities is visible. The development of the node embeddings over the three iterations shows the manifestation of the first-, second-, and higher-order proximity by ComE's closed loop. The node embeddings are densified in their communities and spread out in regards to other communities. All $K=10$ components of the Gaussian mixture model are used for $D=4$ and $D=128$.
 
-Node are distributed over the $K=10$ communities as shown in the histogram in Figure \ref{fig:fb_emb_weights}:
+The nodes are distributed over the $K=10$ communities as shown in the histograms in Figure \ref{fig:fb_emb_weights}. Figure \ref{fig:fb_emb_weights_d2} shows that with representation size $D=2$, ComE BGMM+VI drops 6 communites, effecitvelly using only 4 communities in the final embedding, because the two-dimensional node embeddings are not expressive enough to support more communities. Figures \ref{fig:fb_emb_weights_d4} and \ref{fig:fb_emb_weights_d128} show that with representation sizes $D=4$ and $D=128$ respectivelly, all $K=10$ communities are used.
+
+The tradeoff between the representation size of the embedding $D$ and the embedding expressiveness is demonstrated. When choosing a too low-dimensional embedding, the embedding might not be expressive enough to capture the communities and reduces the quality of the community embedding and detection. When choosing a too high-dimensional embedding, the node embeddings get so expressive that BGMM+VI is not able to drop unused communities because all communities are used in one of the many dimensions.
 
 \begin{figure*}
     \centering
@@ -531,8 +533,83 @@ Node are distributed over the $K=10$ communities as shown in the histogram in Fi
     \label{fig:fb_emb_weights}
 \end{figure*}
 
-Figure \ref{fig:fb_emb_weights_d2} shows that with representation size $D=2$, ComE BGMM+VI drops 6 communites, effecitvelly using only 4 communities in the final embedding, because the two-dimensional node embeddings are not expressive enough to support more communities. Figures \ref{fig:fb_emb_weights_d4} and \ref{fig:fb_emb_weights_d128} show that with representation sizes $D=4$ and $D=128$ respectivelly, all $K=10$ communities are used.
+\subsection{Friend Suggestions}
 
+With node and community embeddings and community assignments generated for $D \in [2,4,128]$ and $K=10$ with training data in the previous section, top-$N$ friend suggestion recommendations are generated from the training node and community embeddings with Algorithm \ref{alg:friend_sug} and Algorithm \ref{alg:friend_sug_com}.
+
+The shortest-embeddings-distance approach is employed, recommending friends to users that have the shortest distance node embeddings over all users (Algorithm \ref{alg:friend_sug}) or only over users in the same community (Algorithm \ref{alg:friend_sug_com}). Users who are already connected are not recommended again.
+
+\section{Evaluation}
+
+The charts in Fig. \ref{fig:fb_hit_rates} show the hit-rates for top-$N$ recommendations for testing users.
+
+\begin{figure}[h]
+    \centering
+    % d2
+    \begin{subfigure}{.48\textwidth}
+        \centering
+        \includegraphics[width=1\linewidth]{images/fb/hit_rates_d-2.png}
+        \caption{$D=2$ on linear $N$-axis.}
+        \label{fig:fb_hit_rates_d2}
+    \end{subfigure}%
+
+    % d4
+    \begin{subfigure}{.48\textwidth}
+        \centering
+        \includegraphics[width=1\linewidth]{images/fb/hit_rates_d-4.png}
+        \caption{$D=4$ on linear $N$-axis.}
+        \label{fig:fb_hit_rates_d4}
+    \end{subfigure}%
+
+    % d128
+    \begin{subfigure}{.48\textwidth}
+        \centering
+        \includegraphics[width=1\linewidth]{images/fb/hit_rates_d-128.png}
+        \caption{$D=128$ on linear $N$-axis.}
+        \label{fig:fb_hit_rates_d128}
+    \end{subfigure}%
+
+    \caption{Hit-rates of \citetitle{social_circles_fb} graph's top-$N$ friend suggestions on $N$-axis for $D \in [2,4,128]$. Hit-rate lines for Algorithm \ref{alg:friend_sug} and Algorithm \ref{alg:friend_sug_com} overlap for $D=2$ and $D=4$.}
+    \label{fig:fb_hit_rates}
+\end{figure}
+
+Two hit-rate lines are shown for each embedding representation size $D \in [2,4,128]$ on $N$-axis. The blue line shows the hit-rates when generating friend suggestions from all users (Algorithm \ref{alg:friend_sug}). The orange line shows the hit-rate when generating recommendations from users in the same community (Algorithm \ref{alg:friend_sug_com}). For lower-dimensional embeddings with $D \in [2,4]$, the hit-rates for Algorithm \ref{alg:friend_sug} and Algorithm \ref{alg:friend_sug_com} largely overlap.
+
+Table \ref{table:fb_hit_rates} shows readings of hit-rates over the algorithms and embedding dimensionality for top-$5$, top-$10$, and top-$20$ recommendations:
+
+\begin{figure}[h]
+    \centering
+    \caption{Hit-rates of \citetitle{social_circles_fb} graph's top-$N$ friend suggestions for algorithms \ref{alg:friend_sug} and \ref{alg:friend_sug_com}, $N \in [10, 20]$, and $D \in [2,4,128]$.}
+    \label{table:fb_hit_rates}
+    \begin{tabular}{ l | l | c | c | c }
+        \hline
+        \empty                                              & \empty  & top-$5$         & top-$10$        & top-$20$        \\
+        \hline
+        \hline
+        \multirow{3}{*}{Algorithm \ref{alg:friend_sug}}     & $D=2$   & 8.5\%           & 14.2\%          & 21.9\%          \\
+                                                            & $D=4$   & 18.1\%          & 26.5\%          & 38.4\%          \\
+                                                            & $D=128$ & \textbf{31.3\%} & \textbf{43.6\%} & \textbf{58.8\%} \\
+        \hline
+        \multirow{3}{*}{Algorithm \ref{alg:friend_sug_com}} & $D=2$   & 8.4\%           & 14.1\%          & 21.8\%          \\
+                                                            & $D=4$   & 18.0\%          & 26.4\%          & 38.2\%          \\
+                                                            & $D=128$ & \textbf{24.1\%} & \textbf{32.9\%} & \textbf{41.8\%} \\
+        \hline
+    \end{tabular}
+\end{figure}
+
+Hit-rates based on top-$5$, top-$10$, and top-$20$ recommendations are chosen since higher $N$ are not practical for recommendations.
+
+Presenting only the top-$10$ friend suggestions to users, a hit-rate of $43.6\%$ when considering all users, or $32.9\%$, when considering only users from the same community, is achieved. A top-$5$ hit-rate of $31.3\%$ (all users) and $24.1\%$ (same community) is achieved, which can be considered viable for business use-cases, especially for only showing 5 recommendations to users. A top-$20$ hit-rate of $58.8\%$ (all users) and $41.8\%$ (same community) adds to the presented results.
+
+
+\section{Conclusion}
+
+The proposed shortest-embedding-distance friend suggestion recommender system based on embeddings generated with the community embeddings algorithm ComE BGMM+VI shows promising results.
+A top-$10$ recommendations hit-rate of $43.6\%$ when considering all users (Algorithm \ref{alg:friend_sug}), and over $32.9\%$ when considering users in the same community (Algorithm \ref{alg:friend_sug_com}) is achieved for Facebook friend suggestions.
+
+\subsection{Future Work}
+
+This work explores generating friend suggestions from node and community embeddings generated by ComE. Three values of the representation size $D$ were used in experimentation. Experimenting with more, different combinations of hyperparameters, and especially varying the number of communities $K$ might be of interest. Since in this paper, friend suggestions were explored, it is left for future work to explore item-based recommendations using embeddings. More community-centric recommendations, which deeply consider the community embeddings in generating recommendations, are left for future work.
 
 
 %%% Bibliography
