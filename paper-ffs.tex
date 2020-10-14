@@ -80,16 +80,16 @@ Due to the rapid growth of the internet and data accumulation, recommender syste
 
 Utilizing graph embeddings for recommendation tasks, has recently gained research interest \cite{Palumbo2018AnEC, Palumbo2018KnowledgeGE, GradGyenge2017GraphEB, Sathish2019GraphEB}. The advantages of graph embeddings include data compression and the feature vector format \cite{Godec2018}. Given these advantages and provided competitive results, graph embeddings have the possibility of greatly improving upon graph-based use-cases like recommender systems.
 
-Community Embeddings, in addition to embedding a graph's nodes through first- and second-order proximity, also preserve higher-order proximity by embedding clusters present in the graph data. The graph and community embedding algorithm ComE aims to preserve first-, second- and higher-order proximity by embedding a graph's nodes and communities \cite{ComE}.
-
-This work specifically examines community embeddings for friend suggestion recommender systems and evaluates recommendations on social network graph data for the use-case of friend suggestions. Graph and community embeddings generated with ComE BGMM+VI are used to develop a friend suggestions recommender system based on the shortest distances between nodes in the embedding. Recommendations are evaluated by the top-$N$ recommendations hit-rate of test edges. A friend suggestions recommender system with a top-10 leave-one-out hit-rate of 43.6\% and run-time optimized 32.9\% is presented.
-
 \begin{figure}[htbp]
     \centering
     \includegraphics[width=0.48\textwidth]{images/fb/graph_d4.png}
     \caption{\textit{Social Circles: Facebook} graph plotted with networkx's spring layout and node colors representing community membership obtained by ComE BGMM+VI with $D=4$ \cite{networkx}.}
     \label{fig:fb_graph}
 \end{figure}
+
+Community Embeddings, in addition to embedding a graph's nodes through first- and second-order proximity, also preserve higher-order proximity by embedding clusters present in the graph data. The graph and community embedding algorithm ComE aims to preserve first-, second- and higher-order proximity by embedding a graph's nodes and communities \cite{ComE}.
+
+This work specifically examines community embeddings for friend suggestion recommender systems and evaluates recommendations on social network graph data for the use-case of friend suggestions. Graph and community embeddings generated with ComE BGMM+VI\footnote{The ComE BGMM+VI source code and the code used to generate friend suggestions is published at \url{https://github.com/abegehr/ComE_BGMM} \cite{ComE_BGMM_GH}.} are used to develop a friend suggestions recommender system based on the shortest distances between nodes in the embedding. Recommendations are evaluated by the top-$N$ recommendations hit-rate of test edges. A friend suggestions recommender system with a top-10 leave-one-out hit-rate of 43.6\% and run-time optimized 32.9\% is presented.
 
 
 \section{Friend Suggestions}
