@@ -162,7 +162,7 @@ The runtime of ComE BGMM+VI is equivalent to the runtime of ComE in its big-$O$ 
 
 This brings the total time complexity of Algorithm \ref{alg:friend_sug} to $O(\abs{V}\gamma\ell + \abs{V} + T_1 (T_2\abs{V}K + K + \abs{E} + \abs{V}\gamma\ell + \abs{V}K) + \abs{E} + \abs{V}^2N)$. We consider $\gamma$, $\ell$, $T_1$, $T_2$, and $N$ as constant, therefore the time complexity depends on the graph's size $(\abs{V}, \abs{E})$ and the number of communities $K$: $O(K + \abs{V}K + \abs{E} + \abs{V}^2)$.
 
-Algorithm \ref{alg:friend_sug_com} describes in pseudocode how recommendations are computed from ComE BGMM+VI node and community embeddings and community assignments. The advantage of also considers community membership, is that an improvement in time complexity can be obtained, by considering only users in the same community for friend suggestions.
+Algorithm \ref{alg:friend_sug_com} describes in pseudocode how recommendations are computed from ComE BGMM+VI node and community embeddings and community assignments. The advantage of also considering community membership, is that an improvement in time complexity can be obtained, by considering only users in the same community for friend suggestions.
 
 \begin{algorithm}
     \caption{Top-$N$ Social Recommendations based on Node and Community Embeddings}
@@ -200,7 +200,7 @@ Line 1, lines 6-9, and lines 10-17, except for line 12, are the same in Algorith
 
 This brings the total time complexity of Algorithm \ref{alg:friend_sug_com} to $O(\abs{V}\gamma\ell + \abs{V} + T_1 (T_2\abs{V}K + K + \abs{E} + \abs{V}\gamma\ell + \abs{V}K) + \abs{V} + \abs{E} + \frac{\abs{V}^2N}{K})$. Again, we consider $\gamma$, $\ell$, $T_1$, $T_2$, and $N$ as constant, therefore the time complexity depends on the graph's size $(\abs{V}, \abs{E})$ and the number of communities $K$: $O(K + \abs{V}K + \abs{E} + \frac{\abs{V}^2}{K})$.
 
-The runtimes for Algorithm \ref{alg:friend_sug} and \ref{alg:friend_sug_com} when considering $K$ as constant or scaling w.r.t the graph $G = (V, E)$ are shown in Table \ref{tab:runtimes}. The number of friend suggestions $N$ is considered constant w.r.t the graph $G = (V, E)$.
+The runtimes for Algorithm \ref{alg:friend_sug} and \ref{alg:friend_sug_com} when considering $K$ as constant or scaling w.r.t. the graph $G = (V, E)$ are shown in Table \ref{tab:runtimes}. The number of friend suggestions $N$ is considered constant w.r.t. the graph $G = (V, E)$.
 
 \begin{table}
     \centering
@@ -215,7 +215,7 @@ The runtimes for Algorithm \ref{alg:friend_sug} and \ref{alg:friend_sug_com} whe
     \end{tabular}
 \end{table}
 
-When the hyperparameter number of communities $K$ is considered non-constant with respect to the graph $G$, Algorithm \ref{alg:friend_sug_com} reduces the quadratic runtime in comparison to Algorithm \ref{alg:friend_sug_com}.
+When the hyperparameter number of communities $K$ is considered scaling w.r.t. the graph $G$'s size $(\abs{V}, \abs{E})$, Algorithm \ref{alg:friend_sug_com} reduces the quadratic runtime in comparison to Algorithm \ref{alg:friend_sug}.
 $K$ can therefore reduce the quadratic summand $\abs{V}^2N$ by only considering users of the same community for friend suggestions. The reduction in time complexity through Algorithm \ref{alg:friend_sug_com} is only scalable when considering $K$ to be scale with the input graph's size. This assumption can be made when considering communities as groups of friends: with ten times more users, these users form ten times more communities.
 
 
@@ -230,7 +230,7 @@ The small \textit{Zachary’s Karate Club graph} dataset will be used to visuall
     \label{fig:karateclub_spring}
 \end{figure}
 
-Fig. \ref{fig:karateclub_spring} shows the 34 nodes and 78 edges of the \textit{Zachary’s Karate Club graph} dataset plotted as a graph with the Python network package networkx's spring layout.\cite{networkx} Spring layout simulates a force-directed representation of the network, by treating edges as springs pulling nodes together and treating nodes as repelling objects, sometimes called an anti-gravity force.\cite{networkx} The node classification, represented by node color, shown in Fig. \ref{fig:karateclub_spring} was obtained by running ComE with BGMM and VI with the hyperparameters presented in Table \ref{tab:params_karateclub}.
+Fig. \ref{fig:karateclub_spring} shows the 34 nodes and 78 edges of the \textit{Zachary’s Karate Club graph} dataset plotted as a graph with the Python network package networkx's spring layout \cite{networkx}. Spring layout simulates a force-directed representation of the network, by treating edges as springs pulling nodes together and treating nodes as repelling objects, sometimes called an anti-gravity force \cite{networkx}. The node classification, represented by node color, shown in Fig. \ref{fig:karateclub_spring} was obtained by running ComE with BGMM and VI with the hyperparameters presented in Table \ref{tab:params_karateclub}.
 
 \begin{table}
     \centering
@@ -272,7 +272,7 @@ Fig. \ref{fig:karateclub_spring} shows the 34 nodes and 78 edges of the \textit{
     \end{tabular}
 \end{table}
 
-As can be seen in Fig. \ref{fig:karateclub_spring}, the two communities in the \textit{Zachary’s Karate Club graph} dataset are correctly identified, despite the number of communities being initialized with $K=5$. Thanks to the Bayesian approach to community modeling and optimization through variational inference, three unused communities are dropped, which leaves the prominent two communities present in the dataset. The node classification obtained reflects the node classification published in the \citeyear{ComE} original ComE paper by \citeauthor{ComE}.\cite{ComE}
+As can be seen in Fig. \ref{fig:karateclub_spring}, the two communities in the \textit{Zachary’s Karate Club graph} dataset are correctly identified, despite the number of communities being initialized with $K=5$. Thanks to the Bayesian approach to community modeling and optimization through variational inference, three unused communities are dropped, which leaves the prominent two communities present in the dataset. The node classification obtained reflects the node classification published in the \citeyear{ComE} original ComE paper by \citeauthor{ComE} \cite{ComE}.
 
 \subsection{Training and Testing Split}
 
@@ -374,7 +374,7 @@ The method of generating friend suggestions using ComE BGMM+VI embeddings and th
 
 \subsection{Dataset}
 
-The \textit{Social circles: Facebook} dataset was sourced from the profile and network data of ten ego-networks (egonets) through a custom Facebook app by \citeauthor{social_circles_in_ego_networks} as part of their \citeyear{social_circles_in_ego_networks} article \textit{Learning to Discover Social Circles in Ego Networks}.\cite{social_circles_in_ego_networks}
+The \textit{Social circles: Facebook} dataset was sourced from the profile and network data of ten ego-networks (egonets) through a custom Facebook app by \citeauthor{social_circles_in_ego_networks} as part of their \citeyear{social_circles_in_ego_networks} article \textit{Learning to Discover Social Circles in Ego Networks} \cite{social_circles_in_ego_networks}.
 
 Fig. \ref{fig:egonet} shows an illustration of the ego-network of user $u$. User $u$ has direct connections to $v_i$, called alters. Alters can be connected to each other and build circles of users, like families, high school friends, or college friends.
 
@@ -394,7 +394,7 @@ Users with only one connection are removed from the dataset since no network inf
 
 $1169$ of the 4039 users of the \textit{Social circles: Facebook} graph have at least $50$ connections and are used for testing friend suggestions. The threshold of $50$ friends for considering users for testing is set to make sure enough data is available to make sensable suggestions for testing users.
 
-Now that the testing users are identified, the leave-one-out method is employed for obtaining one testing friendship per testing user. The friendship chosen to leave out for testing for each testing user is chosen randomly using NumPy's random choice.\cite{oliphant2006guide, van2011numpy}
+Now that the testing users are identified, the leave-one-out method is employed for obtaining one testing friendship per testing user. The friendship chosen to leave out for testing for each testing user is chosen randomly using NumPy's random choice \cite{oliphant2006guide, van2011numpy}.
 
 \subsection{Embedding}
 
@@ -477,7 +477,7 @@ The $4$- and $128$-dimensional node and community embeddings cannot effectively 
 \fbEmbAnimD{4}
 \fbEmbAnimD{128}
 
-Fig. \ref{fig:fb_graphs} shows the graph spring plotted with networkx and nodes colored by community membership after the last iteration of ComE.\cite{networkx} The spring plotted graph structure on Fig. \ref{fig:fb_graphs} suggest, that with embedding dimension $D=4$, more fitting communities are detected than for $D=2$ and $D=128$.
+Fig. \ref{fig:fb_graphs} shows the graph spring plotted with networkx and nodes colored by community membership after the last iteration of ComE \cite{networkx}. The spring plotted graph structure on Fig. \ref{fig:fb_graphs} suggest, that with embedding dimension $D=4$, more fitting communities are detected than for $D=2$ and $D=128$.
 
 \begin{figure*}[htbp]
     \centering
