@@ -477,7 +477,7 @@ The $4$- and $128$-dimensional node and community embeddings cannot effectively 
 \fbEmbAnimD{4}
 \fbEmbAnimD{128}
 
-Fig. \ref{fig:fb_graphs} shows the graph spring plotted with networkx and nodes colored by community membership after the last iteration of ComE \cite{networkx}. The spring plotted graph structure on Fig. \ref{fig:fb_graphs} suggest, that with embedding dimension $D=4$, more fitting communities are detected than for $D=2$ and $D=128$.
+Fig. \ref{fig:fb_graphs} shows the graph spring plotted with networkx and nodes colored by community membership after the last iteration of ComE \cite{networkx}. The spring plotted graph structure on Fig. \ref{fig:fb_graphs} suggests, that with embedding dimension $D=4$, more fitting communities are detected than for $D=2$ and $D=128$.
 
 \begin{figure*}[htbp]
     \centering
@@ -543,7 +543,7 @@ The tradeoff between the representation size of the embedding $D$ and the embedd
 
 With node and community embeddings and community assignments generated for $D \in [2,4,128]$ and $K=10$ with training data in the previous section, top-$N$ friend suggestion recommendations are generated from the training node and community embeddings with Algorithm \ref{alg:friend_sug} and Algorithm \ref{alg:friend_sug_com}.
 
-The shortest-embeddings-distance approach is employed, recommending friends to users that have the shortest distance node embeddings over all users (Algorithm \ref{alg:friend_sug}) or only over users in the same community (Algorithm \ref{alg:friend_sug_com}). Users who are already connected are not recommended again.
+The shortest-embeddings-distance approach is employed, recommending friends to users who have the shortest distance node embeddings over all users (Algorithm \ref{alg:friend_sug}) or only over users in the same community (Algorithm \ref{alg:friend_sug_com}). Users who are already connected are not recommended again.
 
 \section{Evaluation}
 
